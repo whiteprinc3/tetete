@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Правила войн | Kami yufu.su</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+:root {
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --ink: #111827;
+  --ink-2: #4b5563;
+  --ink-3: #9ca3af;
+  --rule: #e5e7eb;
+  --rule-strong: #d1d5db;
+  --tint: #f3f4f6;
+  --inv-bg: #111827;
+  --inv-fg: #ffffff;
+  
+  --box-border: #e2e8f0;
+  --box-bg: #f8fafc;
+
+  --serif: "IBM Plex Serif", "PT Serif", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "PT Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --idw: 8rem;
+  --bar-h: 4.5rem;
+  --side-w: 18rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115;
+    --surface: #16181d;
+    --ink: #f3f4f6;
+    --ink-2: #9ca3af;
+    --ink-3: #6b7280;
+    --rule: #262a32;
+    --rule-strong: #374151;
+    --tint: #1f232b;
+    --inv-bg: #f3f4f6;
+    --inv-fg: #111827;
+    
+    --box-border: #2d3748;
+    --box-bg: #1a1e24;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #16181d;
+  --ink: #f3f4f6;
+  --ink-2: #9ca3af;
+  --ink-3: #6b7280;
+  --rule: #262a32;
+  --rule-strong: #374151;
+  --tint: #1f232b;
+  --inv-bg: #f3f4f6;
+  --inv-fg: #111827;
+  
+  --box-border: #2d3748;
+  --box-bg: #1a1e24;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.65 var(--sans);
+  -webkit-text-size-adjust: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--inv-bg); outline-offset: 2px; }
+
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: var(--side-w);
+  flex: 0 0 var(--side-w);
+  background: var(--surface);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  z-index: 10;
+}
+
+.brand {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.org {
+  margin: 0 0 0.25rem;
+  font: 500 0.75rem/1.2 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+h1 {
+  margin: 0;
+  font: 600 1.35rem/1.2 var(--serif);
+  color: var(--ink);
+}
+
+.side-nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+}
+.side-nav-scroll h2 {
+  margin: 0 0 0.75rem 0.5rem;
+  font: 500 0.6875rem/1.2 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.nav { display: flex; flex-direction: column; gap: 0.15rem; margin: 0; padding: 0; list-style: none; }
+.nav a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav a:hover { background: var(--tint); color: var(--ink); }
+.nav a[aria-current="true"] { background: var(--inv-bg); color: var(--inv-fg); font-weight: 500; }
+.nav a[aria-current="true"] .c { color: var(--inv-fg); opacity: 0.7; }
+.nav .c { font: 400 0.75rem/1 var(--mono); color: var(--ink-3); font-variant-numeric: tabular-nums; flex: none; }
+.nav li.off a { opacity: 0.4; pointer-events: none; }
+
+.workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  background: var(--bg);
+}
+
+.header {
+  height: var(--bar-h);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  z-index: 5;
+  gap: 1.5rem;
+}
+
+.tabs { display: flex; gap: 0.5rem; }
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--ink-2);
+  transition: all 0.15s ease;
+}
+.tab:hover { background: var(--tint); color: var(--ink); }
+.tab[aria-selected="true"] { background: var(--inv-bg); color: var(--inv-fg); }
+.tab .n { font: 400 0.75rem/1 var(--mono); font-variant-numeric: tabular-nums; opacity: 0.8; }
+
+.search { flex: 1 1 20rem; max-width: 30rem; margin-left: auto; min-width: 0; }
+.search input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  color: var(--ink);
+  transition: border-color 0.15s ease;
+}
+.search input:focus { outline: none; border-color: var(--ink-3); }
+.search input::placeholder { color: var(--ink-3); opacity: 1; }
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 3rem 4rem;
+  scroll-behavior: smooth;
+}
+
+.content-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+.status { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; }
+.check { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
+.check input { width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--inv-bg); cursor: pointer; }
+
+.sec { padding-top: 2.5rem; }
+.sec:first-child { padding-top: 0; }
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0.5rem;
+}
+.sec-head .no { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.sec-head h3 { margin: 0; font: 600 1.5rem/1.3 var(--serif); color: var(--ink); }
+.sec-head .cnt { margin-left: auto; font: 400 0.8125rem/1 var(--mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+.row {
+  display: grid;
+  grid-template-columns: var(--idw) minmax(0, 1fr) auto;
+  grid-template-areas: "id body act";
+  gap: 0 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.row.prose {
+  display: block;
+  padding: 1.25rem 0;
+}
+.row.prose .id, .row.prose .act { display: none; }
+.row.prose .body { max-width: 100%; }
+.row.prose .txt { margin-bottom: 0.75rem; font-size: 1.0625rem; }
+.row.prose .txt:last-child { margin-bottom: 0; }
+
+.id {
+  grid-area: id;
+  font: 500 0.8125rem/1.5 var(--mono);
+  color: var(--ink-3);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+.id:not(:empty) {
+  background: var(--tint);
+  align-self: start;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+.body { grid-area: body; min-width: 0; }
+.act { grid-area: act; align-self: start; }
+.full { margin: 0 0 0.25rem; font: 400 0.875rem/1.5 var(--mono); color: var(--ink-3); }
+.txt { margin: 0; max-width: 100%; overflow-wrap: anywhere; font-size: 1.0625rem; line-height: 1.65; }
+
+.blocks-container {
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.85rem;
+  background: var(--box-bg);
+  border-left: 2px solid var(--box-border);
+  border-radius: 0 4px 4px 0;
+}
+
+.info-label {
+  font: 600 0.6875rem/1.2 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.info-value {
+  font: 500 0.9375rem/1.5 var(--sans);
+  color: var(--ink-2);
+  letter-spacing: 0.01em;
+}
+.info-value span { display: block; }
+
+.copy {
+  padding: 0.25rem 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  cursor: pointer;
+  font: 500 0.6875rem/1.4 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.copy:hover { color: var(--ink); border-color: var(--ink-3); }
+@media (hover: hover) {
+  .copy { opacity: 0; }
+  .row:hover .copy, .row:focus-within .copy { opacity: 1; }
+}
+
+mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; border-radius: 2px; }
+
+.empty { padding: 4rem 0; max-width: 50ch; margin: 0 auto; text-align: center; }
+.empty p { margin: 0 0 1rem; font-size: 1.125rem; color: var(--ink-2); }
+.linkbtn {
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 500;
+}
+.linkbtn:hover { background: var(--tint); }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 1024px) {
+  .sidebar { position: fixed; transform: translateX(-100%); transition: transform 0.3s ease; }
+  .sidebar.open { transform: translateX(0); }
+  .content-scroll { padding: 1.5rem 1.5rem 3rem; }
+  .header { padding: 0 1.5rem; }
+}
+@media (max-width: 768px) {
+  .row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "id act" "body body"; gap: 0.3rem 1rem; padding: 1rem 0; }
+  .id { justify-self: start; }
+  .row.noid { grid-template-areas: "body body"; }
+  .row.noid .id, .row.noid .act { display: none; }
+  .copy { opacity: 1 !important; }
+  .tab { padding: 0.5rem; font-size: 0.9rem; }
+  .search { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <p class="org">Kami | yufu.su</p>
+      <h1 id="h1">Правила войн</h1>
+    </div>
+    <div class="side-nav-scroll">
+      <h2>Разделы</h2>
+      <ul class="nav" id="nav"></ul>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="header">
+      <div class="tabs" role="tablist" aria-label="Документы">
+        <button class="tab" role="tab" id="tab-wars" aria-controls="panel" data-tab="wars" type="button">Взаимоотношения кланов <span class="n" data-count="wars"></span></button>
+        <button class="tab" role="tab" id="tab-battle" aria-controls="panel" data-tab="battle" type="button">Пример битвы <span class="n" data-count="battle"></span></button>
+      </div>
+      <div class="search">
+        <label class="sr" for="q">Поиск по документу</label>
+        <input id="q" type="search" placeholder="Поиск по пунктам (клавиша /)" autocomplete="off" spellcheck="false">
+      </div>
+    </header>
+
+    <div class="content-scroll" id="content-scroll">
+      <div class="content-inner" id="panel" role="tabpanel" tabindex="-1">
+        <div class="tools">
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </div>
+        <div id="content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var DOCS = {
+    wars: {
+      title: "Правила войн",
+      sections: [
+        { id: "intro", title: "Введение", items: [
+          { t: "Война — это конфликт между кланами, который разрешается на поле боя. Все действия сторон строго регламентированы для обеспечения баланса и сохранения ролевого отыгрыша." }
+        ]},
+        { id: "start", title: "Начало войны", items: [
+          { i: "1.1", t: "Война может быть объявлена только при наличии формального повода (нарушение границ, оскорбление, конфликт интересов)." },
+          { i: "1.2", t: "Для объявления войны глава клана-агрессора обязан уведомить администрацию сервера и предоставить обоснование." },
+          { i: "1.3", t: "По механике сервера можно захватывать (атаковать) территории от 3 человек." }
+        ]},
+        { id: "process", title: "Пошаговый процесс войны", items: [
+          { i: "2.1", t: "Сбор войск.", p: "Обе стороны собираются на территории клана." },
+          { i: "2.2", t: "Совет и ритуалы.", p: "Проводится совет, где определяются планы. Первым делом армия посещает ближайший храм или святилище для молитв о победе и ритуалов очищения." },
+          { i: "2.3", t: "Выдвижение на поле боя.", p: "Армии сближаются. Поднимается боевой клич." },
+          { i: "2.4", t: "Дуэль воинов.", p: "Отправляются по одному воину с каждой стороны. Победа в этой дуэли благополучно сказывается на боевом духе всей армии." },
+          { i: "2.5", t: "Основное столкновение.", p: "Начинается массовое сражение. Приказы передаются при помощи барабанов, колоколов и раковин." },
+          { i: "2.6", t: "Победный клич.", p: "Когда сражение кажется выигранным, воины могут поднять победный боевой клич (ка-тидоки)." }
+        ]},
+        { id: "aftermath", title: "Последствия битвы", items: [
+          { i: "3.1", t: "Победивший клан осматривает оставленные трупы. Головы видных вассалов врага могут обменять на головы своих воинов, в то время как головы вассалов союзников отправляют на родину. Трупы не титулованных воинов бросают в чистом поле." },
+          { i: "3.2", t: "Во время сражения за войском следит икусамэцукэ (слуга даймё), отмечавший нарушения дисциплины, а также подвиги воинов. После битвы на основании его записей производится награждение." },
+          { i: "3.3", t: "Побежденный клан теряет часть своих владений и крестьян, считавших победивший клан более авторитетным." },
+          { i: "3.4", t: "При проигрыше в войне люди либо договариваются на своих условиях, либо капитулируют по механике сервера." }
+        ]},
+        { id: "bushido", title: "Кодекс Бусидо", items: [
+          { i: "4.1", t: "Во время битв каждый воин, державший в руках катану, чтит и соблюдает кодекс бусидо, считая недопустимым использовать подлые приемы." },
+          { i: "4.2", t: "Если старший заметит использование подлых приемов, он смело может рассматривать данного человека как труса и предателя, равняя его под ронина." }
+        ]}
+      ]
+    },
+    battle: {
+      title: "Пример битвы",
+      sections: [
+        { id: "example", title: "РП-справка", items: [
+          { t: "Поскольку в битвах сражались значительные массы людей, исход сражения во многом зависел от военного искусства полководцев." },
+          { t: "Перед выступлением в поход проходил совет, на котором определялись военные планы. Первым делом армия посещала ближайший храм или святилище, где возносили молитвы о победе и проходили ритуалы очищения." },
+          { t: "По прибытии на место битвы армии обеих сторон поднимали боевой клич, сближались и отправляли по одному воину каждой из сторон. Победа в этой дуэли благополучно сказывалась на боевом духе всей армии, после чего начиналось столкновение всех войск." },
+          { t: "Во время битвы приказы передавались при помощи барабанов, колоколов, раковин. Когда сражение казалось выигранным, воины могли поднять победный боевой клич (ка-тидоки)." },
+          { t: "Победивший клан в первую очередь осматривал оставленные трупы. Часто головы видных вассалов врага могли обменять на головы своих воинов, в то время как головы вассалов союзников отправляли на родину. Трупы не титулованных воинов бросали в чистом поле." },
+          { t: "Во время сражения за войском следил икусамэцукэ, слуга даймё, отмечавший нарушения дисциплины, а также подвиги воинов. После битвы на основании его записей производилось награждение. Побежденный клан терял часть своих владений и крестьян, считавших победивший клан более авторитетным." },
+          { t: "Во время битв каждый воин, который держал в руках катану, чтил и соблюдал кодекс бусидо, считая недопустимым использовать подлые приемы. Если это замечал старший, то смело мог рассматривать данного человека как труса и предателя, равняя его под ронина." }
+        ]}
+      ]
+    }
+  };
+
+  var ORDER = ["wars", "battle"];
+
+  function norm(s) { return String(s).toLowerCase().replace(/ё/g, "е"); }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function arr(v) { return v == null ? [] : (Array.isArray(v) ? v : [v]); }
+  function plural(n, one, few, many) {
+    var m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+    return many;
+  }
+
+  ORDER.forEach(function (k) {
+    DOCS[k].sections.forEach(function (sec) {
+      sec.items.forEach(function (it) {
+        it.idx = norm([it.i, it.full, it.t, it.n, it.p, it.x, it.e, arr(it.s).join(" ")].filter(Boolean).join(" "));
+      });
+    });
+  });
+
+  var state = { tab: "wars", q: "", words: [] };
+
+  function matches(it) {
+    for (var i = 0; i < state.words.length; i++) {
+      if (it.idx.indexOf(state.words[i]) === -1) return false;
+    }
+    return true;
+  }
+
+  function hl(text) {
+    if (!state.words.length) return esc(text);
+    var n = norm(text), ranges = [];
+    state.words.forEach(function (w) {
+      var pos = 0, at;
+      while ((at = n.indexOf(w, pos)) > -1) { ranges.push([at, at + w.length]); pos = at + w.length; }
+    });
+    if (!ranges.length) return esc(text);
+    ranges.sort(function (a, b) { return a[0] - b[0]; });
+    var merged = [ranges[0]];
+    for (var i = 1; i < ranges.length; i++) {
+      var last = merged[merged.length - 1];
+      if (ranges[i][0] <= last[1]) last[1] = Math.max(last[1], ranges[i][1]);
+      else merged.push(ranges[i]);
+    }
+    var out = "", p = 0;
+    merged.forEach(function (r) {
+      out += esc(text.slice(p, r[0])) + "<mark>" + esc(text.slice(r[0], r[1])) + "</mark>";
+      p = r[1];
+    });
+    return out + esc(text.slice(p));
+  }
+
+  function countDoc(k) {
+    var shown = 0, total = 0;
+    DOCS[k].sections.forEach(function (sec) {
+      sec.items.forEach(function (it) { total++; if (matches(it)) shown++; });
+    });
+    return { shown: shown, total: total };
+  }
+
+  function infoBlock(label, value) {
+    return '<div class="info-block">' +
+      '<span class="info-label">' + esc(label) + '</span>' +
+      '<div class="info-value">' + value + '</div>' +
+    '</div>';
+  }
+
+  function rowHtml(it, doc, secKey, idx) {
+    var rid = it.i || "";
+    var blocks = "";
+    
+    if (it.p) blocks += infoBlock("Пояснение", hl(it.p));
+    if (it.n) blocks += infoBlock("Примечание", hl(it.n));
+    if (it.x) blocks += infoBlock("Пример", hl(it.x));
+    if (it.e) blocks += infoBlock("Исключение", hl(it.e));
+    if (it.s) {
+      var sVal = arr(it.s).map(function (v) { return "<span>" + hl(v) + "</span>"; }).join("");
+      blocks += infoBlock(doc.sLabel, sVal);
+    }
+
+    var isProse = !rid;
+    var rowClass = "row" + (isProse ? " prose" : "");
+
+    return '<article class="' + rowClass + '">' +
+      '<div class="id">' + (rid ? hl(rid) : "") + "</div>" +
+      '<div class="body">' +
+        (it.full ? '<p class="full">' + hl(it.full) + "</p>" : "") +
+        '<p class="txt">' + hl(it.t) + "</p>" +
+        (blocks ? '<div class="blocks-container">' + blocks + "</div>" : "") +
+      "</div>" +
+      '<div class="act"><button class="copy" type="button" data-sec="' + secKey + '" data-idx="' + idx + '" aria-label="Копировать пункт ' + esc(rid || "") + '">Копировать</button></div>' +
+    "</article>";
+  }
+
+  function render() {
+    var key = state.tab, doc = DOCS[key];
+    var navHtml = "", html = "", shown = 0, total = 0;
+
+    doc.sections.forEach(function (sec) {
+      var list = [];
+      sec.items.forEach(function (it, idx) {
+        total++;
+        if (matches(it)) { list.push([it, idx]); shown++; }
+      });
+      var sid = key + "-" + sec.id;
+      navHtml += '<li class="' + (list.length ? "" : "off") + '"><a href="#' + sid + '" data-sec="' + sid + '">' +
+        "<span>" + esc(sec.title) + '</span><span class="c">' + list.length + "</span></a></li>";
+      if (!list.length) return;
+      html += '<section class="sec" id="' + sid + '" aria-labelledby="h-' + sid + '">' +
+        '<div class="sec-head">' +
+          '<h3 id="h-' + sid + '">' + esc(sec.title) + "</h3>" +
+          '<span class="cnt">' + list.length + " " + plural(list.length, "пункт", "пункта", "пунктов") + "</span>" +
+        "</div>" +
+        list.map(function (p) { return rowHtml(p[0], doc, sec.id, p[1]); }).join("") +
+      "</section>";
+    });
+
+    if (!shown) {
+      var other = ORDER.filter(function (k) { return k !== key; })[0];
+      var oc = countDoc(other);
+      html = '<div class="empty"><p>' +
+        (state.q ? "По запросу «" + esc(state.q) + "» в этом документе ничего не найдено." : "В этом документе нет пунктов, подходящих под фильтр.") +
+        "</p>" +
+        (oc.shown ? '<p><button class="linkbtn" type="button" data-goto="' + other + '">Показать совпадения в документе «' + esc(DOCS[other].title) + "» (" + oc.shown + ")</button></p>" : "") +
+        (state.q ? '<p><button class="linkbtn" type="button" data-clear="1">Сбросить запрос</button></p>' : "") +
+      "</div>";
+    }
+
+    document.getElementById("nav").innerHTML = navHtml;
+    document.getElementById("content").innerHTML = html;
+
+    var filtered = state.q;
+    document.getElementById("status").textContent = filtered
+      ? "Найдено " + shown + " из " + total + " " + plural(total, "пункта", "пунктов", "пунктов")
+      : "Всего " + total + " " + plural(total, "пункт", "пункта", "пунктов");
+    document.getElementById("h1").textContent = doc.title;
+    
+    ORDER.forEach(function (k) {
+      var c = countDoc(k);
+      document.querySelector('[data-count="' + k + '"]').textContent = filtered ? c.shown + "/" + c.total : String(c.total);
+      var t = document.getElementById("tab-" + k);
+      t.setAttribute("aria-selected", k === key ? "true" : "false");
+      t.tabIndex = k === key ? 0 : -1;
+    });
+    document.getElementById("panel").setAttribute("aria-labelledby", "tab-" + key);
+    document.title = doc.title + " | Kami yufu.su";
+    
+    document.getElementById("content-scroll").scrollTo(0, 0);
+    observe();
+  }
+
+  var io = null;
+  function observe() {
+    if (io) io.disconnect();
+    if (!("IntersectionObserver" in window)) return;
+    var bar = document.querySelector(".header").offsetHeight || 80;
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var id = e.target.id;
+          document.querySelectorAll("#nav a").forEach(function (a) {
+            if (a.getAttribute("data-sec") === id) a.setAttribute("aria-current", "true");
+            else a.removeAttribute("aria-current");
+          });
+        }
+      });
+    }, { rootMargin: "-" + (bar + 24) + "px 0px -65% 0px", threshold: 0 });
+    document.querySelectorAll(".sec").forEach(function (s) { io.observe(s); });
+  }
+
+  function applyHash(fromUser) {
+    var h = (location.hash || "").replace(/^#/, "");
+    var tab = state.tab, secId = null;
+    if (h === "wars" || h === "battle") tab = h;
+    else if (/^(wars|battle)-/.test(h)) { tab = h.split("-")[0]; secId = h; }
+    var changed = tab !== state.tab;
+    state.tab = tab;
+    if (changed) render();
+    
+    if (secId) {
+      setTimeout(function() {
+        var el = document.getElementById(secId);
+        var container = document.getElementById("content-scroll");
+        if (el && container) {
+          var topPos = el.offsetTop - document.querySelector(".header").offsetHeight - 20;
+          container.scrollTo({ top: topPos, behavior: 'smooth' });
+        }
+      }, 10);
+    }
+  }
+
+  function setTab(k) {
+    if (k === state.tab) return;
+    if (location.hash.replace(/^#/, "") === k) { applyHash(true); }
+    else location.hash = k;
+  }
+
+  function itemText(secKey, idx) {
+    var doc = DOCS[state.tab], sec = doc.sections.filter(function (s) { return s.id === secKey; })[0];
+    var it = sec.items[idx], lines = [];
+    lines.push((it.i ? it.i + (it.full ? " (" + it.full + ")" : "") + " " : "") + it.t);
+    if (it.p) lines.push("Пояснение: " + it.p);
+    if (it.n) lines.push("Примечание: " + it.n);
+    if (it.x) lines.push("Пример: " + it.x);
+    if (it.e) lines.push("Исключение: " + it.e);
+    arr(it.s).forEach(function (v) { lines.push(doc.sLabel + ": " + v); });
+    return lines.join("\n");
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function flash(btn, msg) {
+    btn.textContent = msg;
+    setTimeout(function () { btn.textContent = "Копировать"; }, 1600);
+  }
+
+  function copyItem(btn) {
+    var text = itemText(btn.getAttribute("data-sec"), +btn.getAttribute("data-idx"));
+    var done = function () { flash(btn, "Скопировано"); };
+    var fail = function () { flash(btn, fallbackCopy(text) ? "Скопировано" : "Не удалось"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+    } else fail();
+  }
+
+  var qEl = document.getElementById("q");
+  var timer = null;
+  qEl.addEventListener("input", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      state.q = qEl.value.trim();
+      state.words = norm(state.q).split(/\s+/).filter(Boolean);
+      render();
+    }, 90);
+  });
+  qEl.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { qEl.value = ""; state.q = ""; state.words = []; render(); }
+  });
+
+  document.querySelector(".tabs").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-tab]");
+    if (b) setTab(b.getAttribute("data-tab"));
+  });
+  
+  document.querySelector(".tabs").addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    var i = ORDER.indexOf(state.tab), n = ORDER[(i + (e.key === "ArrowRight" ? 1 : ORDER.length - 1)) % ORDER.length];
+    setTab(n);
+    document.getElementById("tab-" + n).focus();
+    e.preventDefault();
+  });
+
+  document.getElementById("content").addEventListener("click", function (e) {
+    var c = e.target.closest(".copy");
+    if (c) { copyItem(c); return; }
+    var g = e.target.closest("[data-goto]");
+    if (g) { setTab(g.getAttribute("data-goto")); return; }
+    if (e.target.closest("[data-clear]")) {
+      qEl.value = ""; state.q = ""; state.words = []; render(); qEl.focus();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      var t = e.target, tag = t && t.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || (t && t.isContentEditable)) return;
+      e.preventDefault();
+      qEl.focus();
+      qEl.select();
+    }
+  });
+
+  window.addEventListener("hashchange", function () { applyHash(true); });
+
+  applyHash(false);
+  render();
+})();
+</script>
+</body>
+</html>
