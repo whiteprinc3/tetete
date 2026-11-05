@@ -43,7 +43,6 @@
     --tint: #1f232b;
     --inv-bg: #f3f4f6;
     --inv-fg: #111827;
-    
     --box-border: #2d3748;
     --box-bg: #1a1e24;
     color-scheme: dark;
@@ -60,7 +59,6 @@
   --tint: #1f232b;
   --inv-bg: #f3f4f6;
   --inv-fg: #111827;
-  
   --box-border: #2d3748;
   --box-bg: #1a1e24;
   color-scheme: dark;
@@ -83,12 +81,7 @@ body {
 button, input { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--inv-bg); outline-offset: 2px; }
 
-.app {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
+.app { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
 
 .sidebar {
   width: var(--side-w);
@@ -101,48 +94,17 @@ button, input { font: inherit; color: inherit; }
   z-index: 10;
 }
 
-.brand {
-  padding: 1.5rem 1.5rem 1rem;
-  border-bottom: 1px solid var(--rule);
-}
-.org {
-  margin: 0 0 0.25rem;
-  font: 500 0.75rem/1.2 var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-h1 {
-  margin: 0;
-  font: 600 1.35rem/1.2 var(--serif);
-  color: var(--ink);
-}
+.brand { padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--rule); }
+.org { margin: 0 0 0.25rem; font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+h1 { margin: 0; font: 600 1.35rem/1.2 var(--serif); color: var(--ink); }
 
-.side-nav-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem 1rem;
-}
-.side-nav-scroll h2 {
-  margin: 0 0 0.75rem 0.5rem;
-  font: 500 0.6875rem/1.2 var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
+.side-nav-scroll { flex: 1; overflow-y: auto; padding: 1.5rem 1rem; }
+.side-nav-scroll h2 { margin: 0 0 0.75rem 0.5rem; font: 500 0.6875rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .nav { display: flex; flex-direction: column; gap: 0.15rem; margin: 0; padding: 0; list-style: none; }
 .nav a {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  color: var(--ink-2);
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.9375rem;
-  line-height: 1.35;
-  transition: background 0.15s ease, color 0.15s ease;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem;
+  padding: 0.5rem 0.75rem; color: var(--ink-2); text-decoration: none; border-radius: 6px;
+  font-size: 0.9375rem; line-height: 1.35; transition: background 0.15s ease, color 0.15s ease;
 }
 .nav a:hover { background: var(--tint); color: var(--ink); }
 .nav a[aria-current="true"] { background: var(--inv-bg); color: var(--inv-fg); font-weight: 500; }
@@ -150,41 +112,18 @@ h1 {
 .nav .c { font: 400 0.75rem/1 var(--mono); color: var(--ink-3); font-variant-numeric: tabular-nums; flex: none; }
 .nav li.off a { opacity: 0.4; pointer-events: none; }
 
-.workspace {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: 100%;
-  background: var(--bg);
-}
+.workspace { flex: 1; display: flex; flex-direction: column; min-width: 0; height: 100%; background: var(--bg); }
 
 .header {
-  height: var(--bar-h);
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--rule);
-  z-index: 5;
-  gap: 1.5rem;
+  height: var(--bar-h); flex: none; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; background: var(--surface); border-bottom: 1px solid var(--rule); z-index: 5; gap: 1.5rem;
 }
 
 .tabs { display: flex; gap: 0.5rem; }
 .tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  color: var(--ink-2);
-  transition: all 0.15s ease;
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+  background: transparent; border: 1px solid transparent; border-radius: 6px; cursor: pointer;
+  font-weight: 500; color: var(--ink-2); transition: all 0.15s ease;
 }
 .tab:hover { background: var(--tint); color: var(--ink); }
 .tab[aria-selected="true"] { background: var(--inv-bg); color: var(--inv-fg); }
@@ -192,142 +131,65 @@ h1 {
 
 .search { flex: 1 1 20rem; max-width: 30rem; margin-left: auto; min-width: 0; }
 .search input {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background: var(--bg);
-  border: 1px solid var(--rule-strong);
-  border-radius: 6px;
-  color: var(--ink);
-  transition: border-color 0.15s ease;
+  width: 100%; padding: 0.5rem 1rem; background: var(--bg); border: 1px solid var(--rule-strong);
+  border-radius: 6px; color: var(--ink); transition: border-color 0.15s ease;
 }
 .search input:focus { outline: none; border-color: var(--ink-3); }
 .search input::placeholder { color: var(--ink-3); opacity: 1; }
 
-.content-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 2rem 3rem 4rem;
-  scroll-behavior: smooth;
-}
-
-.content-inner {
-  max-width: 1150px;
-  margin: 0 auto;
-  width: 100%;
-}
+.content-scroll { flex: 1; overflow-y: auto; padding: 2rem 3rem 4rem; scroll-behavior: smooth; }
+.content-inner { max-width: 1150px; margin: 0 auto; width: 100%; }
 
 .tools {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--rule);
-  font-size: 0.9375rem;
-  color: var(--ink-2);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+  margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; color: var(--ink-2);
 }
 .status { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; }
-.check { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
-.check input { width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--inv-bg); cursor: pointer; }
 
 .sec { padding-top: 2.5rem; }
 .sec:first-child { padding-top: 0; }
 .sec-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--ink);
-  margin-bottom: 0.5rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem;
+  padding-bottom: 0.75rem; border-bottom: 2px solid var(--ink); margin-bottom: 0.5rem;
 }
-.sec-head .no { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .sec-head h3 { margin: 0; font: 600 1.5rem/1.3 var(--serif); color: var(--ink); }
 .sec-head .cnt { margin-left: auto; font: 400 0.8125rem/1 var(--mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
 
 .row {
-  display: grid;
-  grid-template-columns: var(--idw) minmax(0, 1fr) auto;
-  grid-template-areas: "id body act";
-  gap: 0 1.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: var(--idw) minmax(0, 1fr) auto; grid-template-areas: "id body act";
+  gap: 0 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--rule);
 }
-
-.row.prose {
-  display: block;
-  padding: 1.25rem 0;
-}
+.row.prose { display: block; padding: 1.25rem 0; }
 .row.prose .id, .row.prose .act { display: none; }
 .row.prose .body { max-width: 100%; }
 .row.prose .txt { margin-bottom: 0.75rem; font-size: 1.0625rem; }
 .row.prose .txt:last-child { margin-bottom: 0; }
 
 .id {
-  grid-area: id;
-  font: 500 0.8125rem/1.5 var(--mono);
-  color: var(--ink-3);
-  overflow-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
+  grid-area: id; font: 500 0.8125rem/1.5 var(--mono); color: var(--ink-3);
+  overflow-wrap: break-word; word-break: break-word; hyphens: auto;
 }
 .id:not(:empty) {
-  background: var(--tint);
-  align-self: start;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  text-align: center;
+  background: var(--tint); align-self: start; padding: 0.2rem 0.5rem; border-radius: 4px; text-align: center;
 }
 .body { grid-area: body; min-width: 0; }
 .act { grid-area: act; align-self: start; }
 .full { margin: 0 0 0.25rem; font: 400 0.875rem/1.5 var(--mono); color: var(--ink-3); }
 .txt { margin: 0; max-width: 100%; overflow-wrap: anywhere; font-size: 1.0625rem; line-height: 1.65; }
 
-.blocks-container {
-  margin: 1rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
+.blocks-container { margin: 1rem 0 0; display: flex; flex-direction: column; gap: 0.35rem; }
 .info-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.6rem 0.85rem;
-  background: var(--box-bg);
-  border-left: 2px solid var(--box-border);
-  border-radius: 0 4px 4px 0;
+  display: flex; flex-direction: column; gap: 0.2rem; padding: 0.6rem 0.85rem;
+  background: var(--box-bg); border-left: 2px solid var(--box-border); border-radius: 0 4px 4px 0;
 }
-
-.info-label {
-  font: 600 0.6875rem/1.2 var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
-.info-value {
-  font: 500 0.9375rem/1.5 var(--sans);
-  color: var(--ink-2);
-  letter-spacing: 0.01em;
-}
+.info-label { font: 600 0.6875rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.info-value { font: 500 0.9375rem/1.5 var(--sans); color: var(--ink-2); letter-spacing: 0.01em; }
 .info-value span { display: block; }
 
 .copy {
-  padding: 0.25rem 0.6rem;
-  background: var(--surface);
-  border: 1px solid var(--rule-strong);
-  border-radius: 4px;
-  cursor: pointer;
-  font: 500 0.6875rem/1.4 var(--mono);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  white-space: nowrap;
-  transition: all 0.15s ease;
+  padding: 0.25rem 0.6rem; background: var(--surface); border: 1px solid var(--rule-strong);
+  border-radius: 4px; cursor: pointer; font: 500 0.6875rem/1.4 var(--mono); letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--ink-2); white-space: nowrap; transition: all 0.15s ease;
 }
 .copy:hover { color: var(--ink); border-color: var(--ink-3); }
 @media (hover: hover) {
@@ -336,17 +198,11 @@ h1 {
 }
 
 mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; border-radius: 2px; }
-
 .empty { padding: 4rem 0; max-width: 50ch; margin: 0 auto; text-align: center; }
 .empty p { margin: 0 0 1rem; font-size: 1.125rem; color: var(--ink-2); }
 .linkbtn {
-  padding: 0.5rem 1rem;
-  background: var(--surface);
-  border: 1px solid var(--rule-strong);
-  border-radius: 6px;
-  cursor: pointer;
-  color: var(--ink);
-  font-weight: 500;
+  padding: 0.5rem 1rem; background: var(--surface); border: 1px solid var(--rule-strong);
+  border-radius: 6px; cursor: pointer; color: var(--ink); font-weight: 500;
 }
 .linkbtn:hover { background: var(--tint); }
 
@@ -375,7 +231,7 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <p class="org">Kami | yufu.su</p>
-      <h1 id="h1">Правила войн</h1>
+      <h1 id="h1">Войны кланов</h1>
     </div>
     <div class="side-nav-scroll">
       <h2>Разделы</h2>
@@ -386,7 +242,7 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
   <div class="workspace">
     <header class="header">
       <div class="tabs" role="tablist" aria-label="Документы">
-        <button class="tab" role="tab" id="tab-wars" aria-controls="panel" data-tab="wars" type="button">Взаимоотношения кланов <span class="n" data-count="wars"></span></button>
+        <button class="tab" role="tab" id="tab-rules" aria-controls="panel" data-tab="rules" type="button">Правила войн <span class="n" data-count="rules"></span></button>
         <button class="tab" role="tab" id="tab-battle" aria-controls="panel" data-tab="battle" type="button">Пример битвы <span class="n" data-count="battle"></span></button>
       </div>
       <div class="search">
@@ -411,39 +267,46 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
   "use strict";
 
   var DOCS = {
-    wars: {
+    rules: {
       title: "Правила войн",
+      sLabel: "Последствие",
       sections: [
-        { id: "intro", title: "Введение", items: [
-          { t: "Война — это конфликт между кланами, который разрешается на поле боя. Все действия сторон строго регламентированы для обеспечения баланса и сохранения ролевого отыгрыша." }
-        ]},
         { id: "start", title: "Начало войны", items: [
-          { i: "1.1", t: "Война может быть объявлена только при наличии формального повода (нарушение границ, оскорбление, конфликт интересов)." },
-          { i: "1.2", t: "Для объявления войны глава клана-агрессора обязан уведомить администрацию сервера и предоставить обоснование." },
-          { i: "1.3", t: "По механике сервера можно захватывать (атаковать) территории от 3 человек." }
+          { i: "1.1", t: "Война объявляется главой клана-агрессора только после подачи заявки в администрацию сервера с обоснованием (нарушение границ, оскорбление, конфликт интересов)." },
+          { i: "1.2", t: "Для атаки территории противника по механике сервера необходимо собрать отряд минимум из 3 человек." },
+          { i: "1.3", t: "Захват территории происходит только в случае успешной атаки. Если клан-защитник проигрывает, он либо договаривается на своих условиях, либо капитулирует по механике сервера." },
+          { i: "1.4", t: "Запрещено объявлять войну клану, в котором состоит менее 3 активных игроков онлайн на момент атаки." },
+          { i: "1.5", t: "Время проведения войн ограничено: с 18:00 до 23:00 по серверному времени (МСК). В остальное время захват территорий невозможен." }
         ]},
-        { id: "process", title: "Пошаговый процесс войны", items: [
-          { i: "2.1", t: "Сбор войск.", p: "Обе стороны собираются на территории клана." },
-          { i: "2.2", t: "Совет и ритуалы.", p: "Проводится совет, где определяются планы. Первым делом армия посещает ближайший храм или святилище для молитв о победе и ритуалов очищения." },
-          { i: "2.3", t: "Выдвижение на поле боя.", p: "Армии сближаются. Поднимается боевой клич." },
-          { i: "2.4", t: "Дуэль воинов.", p: "Отправляются по одному воину с каждой стороны. Победа в этой дуэли благополучно сказывается на боевом духе всей армии." },
-          { i: "2.5", t: "Основное столкновение.", p: "Начинается массовое сражение. Приказы передаются при помощи барабанов, колоколов и раковин." },
-          { i: "2.6", t: "Победный клич.", p: "Когда сражение кажется выигранным, воины могут поднять победный боевой клич (ка-тидоки)." }
+        { id: "build", title: "Строительство", items: [
+          { i: "2.1", t: "Запрещено строить оборонительные сооружения (стены, баррикады) за пределами своей территории клана." },
+          { i: "2.2", t: "На захваченной территории разрешено возводить только временные укрепления, которые должны быть снесены по окончании войны." },
+          { i: "2.3", t: "Запрещено использовать баги строительства (застревание в текстурах, невидимые стены) для получения преимущества." },
+          { i: "2.4", t: "Максимальная высота оборонительных сооружений — 3 блока (или эквивалент), чтобы не блокировать обзор и не создавать непреодолимых препятствий." }
         ]},
-        { id: "aftermath", title: "Последствия битвы", items: [
-          { i: "3.1", t: "Победивший клан осматривает оставленные трупы. Головы видных вассалов врага могут обменять на головы своих воинов, в то время как головы вассалов союзников отправляют на родину. Трупы не титулованных воинов бросают в чистом поле." },
-          { i: "3.2", t: "Во время сражения за войском следит икусамэцукэ (слуга даймё), отмечавший нарушения дисциплины, а также подвиги воинов. После битвы на основании его записей производится награждение." },
-          { i: "3.3", t: "Побежденный клан теряет часть своих владений и крестьян, считавших победивший клан более авторитетным." },
-          { i: "3.4", t: "При проигрыше в войне люди либо договариваются на своих условиях, либо капитулируют по механике сервера." }
+        { id: "process", title: "Пошаговый процесс", items: [
+          { i: "3.1", t: "Сбор войск на территории клана." },
+          { i: "3.2", t: "Совет и ритуалы: определение планов, посещение храма/святилища для молитв о победе и очищения." },
+          { i: "3.3", t: "Выдвижение на поле боя, сближение армий и боевой клич." },
+          { i: "3.4", t: "Дуэль воинов: по одному бойцу с каждой стороны. Победа в дуэли поднимает боевой дух армии." },
+          { i: "3.5", t: "Основное столкновение: массовое сражение. Приказы передаются барабанами, колоколами, раковинами." },
+          { i: "3.6", t: "Победный клич (ка-тидоки) при явном перевесе." }
+        ]},
+        { id: "results", title: "Результаты", items: [
+          { i: "4.1", t: "Победитель осматривает трупы. Головы видных вассалов врага обмениваются на головы своих воинов, головы союзников отправляются на родину, трупы простых воинов остаются в поле." },
+          { i: "4.2", t: "Икусамэцукэ (слуга даймё) фиксирует нарушения дисциплины и подвиги воинов. На основании его записей производится награждение." },
+          { i: "4.3", t: "Побежденный клан теряет часть владений и крестьян, которые начинают считать победителя более авторитетным." },
+          { i: "4.4", t: "Проигравший клан либо договаривается на своих условиях, либо капитулирует по механике сервера (потеря территории, ресурсов)." }
         ]},
         { id: "bushido", title: "Кодекс Бусидо", items: [
-          { i: "4.1", t: "Во время битв каждый воин, державший в руках катану, чтит и соблюдает кодекс бусидо, считая недопустимым использовать подлые приемы." },
-          { i: "4.2", t: "Если старший заметит использование подлых приемов, он смело может рассматривать данного человека как труса и предателя, равняя его под ронина." }
+          { i: "5.1", t: "Каждый воин с катаной обязан соблюдать кодекс бусидо: запрещены подлые приемы." },
+          { i: "5.2", t: "За использование подлых приемов старший может объявить воина трусом и предателем, приравняв его к ронину." }
         ]}
       ]
     },
     battle: {
       title: "Пример битвы",
+      sLabel: "Последствие",
       sections: [
         { id: "example", title: "РП-справка", items: [
           { t: "Поскольку в битвах сражались значительные массы людей, исход сражения во многом зависел от военного искусства полководцев." },
@@ -458,7 +321,7 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
     }
   };
 
-  var ORDER = ["wars", "battle"];
+  var ORDER = ["rules", "battle"];
 
   function norm(s) { return String(s).toLowerCase().replace(/ё/g, "е"); }
   function esc(s) {
@@ -482,7 +345,7 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
     });
   });
 
-  var state = { tab: "wars", q: "", words: [] };
+  var state = { tab: "rules", q: "", words: [] };
 
   function matches(it) {
     for (var i = 0; i < state.words.length; i++) {
@@ -635,8 +498,8 @@ mark { background: var(--inv-bg); color: var(--inv-fg); padding: 0 0.12em; borde
   function applyHash(fromUser) {
     var h = (location.hash || "").replace(/^#/, "");
     var tab = state.tab, secId = null;
-    if (h === "wars" || h === "battle") tab = h;
-    else if (/^(wars|battle)-/.test(h)) { tab = h.split("-")[0]; secId = h; }
+    if (h === "rules" || h === "battle") tab = h;
+    else if (/^(rules|battle)-/.test(h)) { tab = h.split("-")[0]; secId = h; }
     var changed = tab !== state.tab;
     state.tab = tab;
     if (changed) render();
